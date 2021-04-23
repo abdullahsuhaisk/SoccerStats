@@ -1,5 +1,5 @@
 import { RouteProp } from '@react-navigation/core'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   View,
   StyleSheet
@@ -7,6 +7,7 @@ import {
 import { DatePicker, DateTitle } from '../../components'
 import { Comparisons } from '../../components/Comparison'
 import { COLORS, SIZES, FONTS, icons, images } from "../../constants"
+import { Context as LeagueContext } from '../../context/LeagueContext';
 
 
 interface Props {
@@ -83,8 +84,10 @@ const comprationsData = [
 const LeagueDetail: React.FC<Props> = (props) => {
   const { route, navigation } = props
   const [selected, setSelected] = useState(dates[0])
+  const {state} = useContext(LeagueContext);
+  console.log(state)
 
-  // console.log(route.params)
+
   return (
     <View style={styles.container}>
       {/* https://aping.bilyoner.com/sto/programs/active */}

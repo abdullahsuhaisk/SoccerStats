@@ -9,18 +9,36 @@ import { COLORS } from "./constants"
 import { AppTabs } from './Navigation/AppTabs';
 import { Provider as AuthProvider } from './context/AuthContext';
 import { AuthStack } from './screens/Authentication/AuthStack';
-import { _retrieveData } from './utils';
+import { _retrieveData, _storeData } from './utils';
 import { setNavigator } from './navigationRef';
 
 const App = (): JSX.Element => {
-  const [showAppIntro, setShowAppIntro] = useState(true);
+  const [isFirstTimeLoad, setIsFirstTimeLoad] = useState(false)
+
+  const checkFirstTimeLoad = () => {
+    _retrieveData("isFirstTimeOpen").then((result) => {
+      if(result === null) {
+        setIsFirstTimeLoad(true)
+      }
+    })
+  }
+
+  useEffect(() => {
+    checkFirstTimeLoad()
+  }, [])
+
+  const handleDone = () => {
+    setIsFirstTimeLoad(false)
+    _storeData('isFirstTimeOpen', 'no')
+  }
+  
   return (
     <>
       <AuthProvider>
         <SafeAreaView style={{ ...styles.safeAreaWrapper, backgroundColor: COLORS.primary }} />
           <SafeAreaView style={{ flex:1, backgroundColor: COLORS.white }}>
           <NavigationContainer ref={(navigator) => {setNavigator(navigator)}}>
-            {showAppIntro ? <AuthStack /> : <AppTabs />}
+            {isFirstTimeLoad ? <AuthStack onDone={handleDone} /> : <AppTabs />}
           </NavigationContainer>
         </SafeAreaView>
       </AuthProvider>

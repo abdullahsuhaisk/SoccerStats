@@ -1,10 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack"
 import { RouteProp } from "@react-navigation/native"
-import { Center } from "../../components";
-import { Button, Text } from "react-native";
 import { AppIntroContainer } from "../";
-import { AuthContext } from "./AuthProvider"
 import LoginScreen from "./LoginScreen"
 import SignupScreen from "./SignupScreen"
 
@@ -25,13 +22,13 @@ interface AuthStackProps {
 
 const Stack = createStackNavigator<AuthParamList>()
 
-export const AuthStack: React.FC<AuthStackProps> = ({ }) => {
+export const AuthStack: React.FC<AuthStackProps> = ({ onDone }) => {
   return (
     <Stack.Navigator screenOptions={{ header: () => null }} initialRouteName="AppIntro" >
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
       <Stack.Screen name="AppIntro" options={{ headerShown: false }}>
-        {props => <AppIntroContainer {...props} />}
+        {props => <AppIntroContainer {...props} onDone={onDone} />}
       </Stack.Screen>
     </Stack.Navigator>
   );

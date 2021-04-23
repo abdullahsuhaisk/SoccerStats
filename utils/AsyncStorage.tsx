@@ -14,12 +14,9 @@ const _storeData = async (key: string, value: string) => {
   }
 };
 
-const _retrieveData = async (key: string): Promise<string> => {
+const _retrieveData = async (key: string): Promise<any> => {
   try {
-    const value = await AsyncStorage.getItem(key);
-    if (value !== null) {
-      return (value)
-    }
+    return await AsyncStorage.getItem(key)
   } catch (error) {
     return (error)
   }
@@ -27,7 +24,7 @@ const _retrieveData = async (key: string): Promise<string> => {
 
 const _removeItem = async (key: string): Promise<string> => {
   try {
-    await AsyncStorage.removeItem(key);
+    await AsyncStorage.removeItem(key)
   } catch (error) {
     console.log(error);
     return error;

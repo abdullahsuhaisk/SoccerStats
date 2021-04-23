@@ -62,6 +62,11 @@ const AppIntroContainer: React.FC<{
       </View>);
   };
 
+  const handleOnClick = () => {
+    navigate("Login")
+    props.onDone()
+  }
+
 
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.primary }}>
@@ -89,7 +94,7 @@ const AppIntroContainer: React.FC<{
             :
             <View style={{ ...styles.buttonWrapper }}>
               <View style={{ width: SIZES.width / 3 }}>
-                <Button title={"Login"} onClick={() => {navigate("Login") }} />
+                <Button title={"Login"} onClick={handleOnClick} />
               </View>
             </View>
         }

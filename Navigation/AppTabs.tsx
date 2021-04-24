@@ -1,11 +1,11 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { LeagueStack } from "../screens/League/LeagueStack";
 import { TopListScreen } from "../screens/TopListScreen";
 import { COLORS, FONTS } from "../constants";
-import { Provider as LeagueProvider } from '../context/LeagueContext';
+import { Context as LeagueContext } from '../context/LeagueContext';
 
 export type AppParamList = {
   League: undefined;
@@ -18,8 +18,12 @@ interface AppTabsProps { }
 const Tabs = createBottomTabNavigator<AppParamList>();
 
 export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
+  const {getLiveData} = useContext(LeagueContext);
+
+  useEffect(() => {
+    getLiveData()
+  }, [])
   return (
-    <LeagueProvider>
       <Tabs.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
@@ -69,6 +73,5 @@ export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
         <Tabs.Screen name="Another Scr" component={TopListScreen} />
         {/* <Tabs.Screen name="Auth" component={AuthStack} /> */}
       </Tabs.Navigator>
-    </LeagueProvider>
   );
 };

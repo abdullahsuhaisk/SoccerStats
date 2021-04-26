@@ -59,7 +59,7 @@ function getData(params, optionsParams) {
   return data;
 }
 
-// Global Functions
+// Global Functions //
 const selectLeague = (dispatch) => {
   return (selectedLeague) => {
     dispatch({ type: 'selectLeague', payload: selectedLeague })
@@ -76,8 +76,8 @@ const selectLeague = (dispatch) => {
 }
 
 const getLiveData = (dispatch) => {
-  return () => {
-    const data = getData({coverageId: "ab1450da-9d77-479c-8ab7-f46b2533b2dc"}, {sportId:1, betCode:true})
+  return (day) => {
+    const data = getData({coverageId: "ab1450da-9d77-479c-8ab7-f46b2533b2dc"}, {sportId:1, betCode:true, day: day})
     axios(getConfig('livescore/matchlist',data))
     .then(function (response) {
       dispatch({type: 'GETLIVEDATA', payload: response.data})
@@ -86,10 +86,8 @@ const getLiveData = (dispatch) => {
     .catch(function (error) {
       console.log(error);
     });
-    
   }
 }
-
 
 export const { Provider, Context } = createDataContext(
   leagueReducer,

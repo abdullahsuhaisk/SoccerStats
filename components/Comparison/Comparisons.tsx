@@ -1,25 +1,15 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { FlatList, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react'
+import { FlatList, Text, View } from 'react-native'
 import { Comparison } from '.'
-import { Context as LeagueContext } from '../../context/LeagueContext';
 
 interface ComparisonsProps {
   data: any
   navigation: any
+  matches: any
 }
 
 
-export const Comparisons: React.FC<ComparisonsProps> = ({ day, navigation }) => {
-  const { state } = useContext(LeagueContext);
-  const [matches, setMatches] = useState(null)
-
-  useEffect(() => {
-    const tournamentId = state.tournamentId;
-    const { stages } = state;
-    const selectedTournamentStage = stages ? stages.find((item) => item.stage.tournament.id === tournamentId) : null
-    setMatches(selectedTournamentStage ? selectedTournamentStage.matches : null)
-  }, [day])
-  console.log(matches)
+export const Comparisons: React.FC<ComparisonsProps> = ({ navigation, matches }) => {  
   if (matches) {
     return (
       <View>
@@ -34,7 +24,6 @@ export const Comparisons: React.FC<ComparisonsProps> = ({ day, navigation }) => 
   else {
     return (<View><Text>No match</Text></View>)
   }
-
 
   function renderItem({ item }: { item: any }) {
     const { awayTeam, homeTeam, hour } = item

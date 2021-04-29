@@ -1,8 +1,17 @@
 import createDataContext from './createDataContext'
 import axios from 'axios'
 
+const leagueCONSTANTS = {
+  SET_LEAGUE: 'SET_SELECTED_LEAGUE',
+  GET_SELECTED_LEAGUE_TOP_LIST: "GET_SELECTED_LEAGUETOPLIST",
+  GET_ALL_MATCHLIST: "GET_ALL_MATCHLIST",
+  LOADING: "LOADING",
+  ERROR: "ERROR"
+}
+
 const initialState = {
-  selectLeague: null,
+  loading: false,
+  error: false,
   id: 0,
   leagueName: "Süper Lig",
   img: 48,
@@ -14,18 +23,22 @@ const initialState = {
 
 const leagueReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'selectLeague':
+    case leagueCONSTANTS.SET_LEAGUE:
       return { ...state, ...action.payload }
-    case 'getting initial league':
+    case leagueCONSTANTS.GET_SELECTED_LEAGUE_TOP_LIST:
       return { ...state, selectedLeagueToplist: action.payload.initialData, tournament: action.payload.metaData.tournament }
-    case 'GETLIVEDATA':
-      return { ...state,  stages: action.payload.initialData}
+    case leagueCONSTANTS.GET_ALL_MATCHLIST:
+      return { ...state, stages: action.payload }
+    case leagueCONSTANTS.LOADING:
+      return { ...state, loading: true }
+    case leagueCONSTANTS.ERROR:
+      return { ...state, loading: false, error: action.payload }
     default:
       return state;
   }
 }
 
-function getConfig (urlParams, data ) {
+function getConfig(urlParams, data) {
   const config = {
     method: 'post',
     url: `https://brdg-d2d66d21-7796-4d6c-a6d5-7fee80f9d915.azureedge.net/${urlParams}`,
@@ -62,12 +75,12 @@ function getData(params, optionsParams) {
 // Global Functions //
 const selectLeague = (dispatch) => {
   return (selectedLeague) => {
-    dispatch({ type: 'selectLeague', payload: selectedLeague })
-    const data = (getData({tournamentId:selectedLeague.tournamentId}))
-    axios(getConfig('livestandings/soccer/table',data))
+    dispatch({ type: leagueCONSTANTS.SET_LEAGUE, payload: selectedLeague })
+    // Getting Selected League TopList => (Super League is Besiktas)
+    axios(getConfig('livestandings/soccer/table', getData({ tournamentId: selectedLeague.tournamentId })))
       .then(function (response) {
-        console.log((response.data));
-        dispatch({ type: 'getting initial league', payload: response.data })
+        // console.log((response.data));
+        dispatch({ type: leagueCONSTANTS.GET_SELECTED_LEAGUE_TOP_LIST, payload: response.data })
       })
       .catch(function (error) {
         console.log(error);
@@ -75,22 +88,21 @@ const selectLeague = (dispatch) => {
   }
 }
 
-const getLiveData = (dispatch) => {
+const getMatchList = (dispatch) => {
   return (day) => {
-    const data = getData({coverageId: "ab1450da-9d77-479c-8ab7-f46b2533b2dc"}, {sportId:1, betCode:true, day: day})
-    axios(getConfig('livescore/matchlist',data))
-    .then(function (response) {
-      dispatch({type: 'GETLIVEDATA', payload: response.data})
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    axios(getConfig('livescore/matchlist', getData({ coverageId: "ab1450da-9d77-479c-8ab7-f46b2533b2dc" }, { sportId: 1, betCode: true, day: day })))
+      .then(function (response) {
+        // console.log(response.data);
+        dispatch({ type: leagueCONSTANTS.GET_ALL_MATCHLIST, payload: response.data.initialData })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 }
 
 export const { Provider, Context } = createDataContext(
   leagueReducer,
-  { selectLeague, getLiveData},
+  { selectLeague, getMatchList },
   { ...initialState }
 )

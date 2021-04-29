@@ -18,10 +18,10 @@ interface AppTabsProps { }
 const Tabs = createBottomTabNavigator<AppParamList>();
 
 export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
-  const {getLiveData} = useContext(LeagueContext);
+  const {getMatchList} = useContext(LeagueContext);
 
   useEffect(() => {
-    getLiveData()
+    getMatchList()
   }, [])
   return (
       <Tabs.Navigator

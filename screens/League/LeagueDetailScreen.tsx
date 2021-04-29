@@ -1,4 +1,4 @@
-import { RouteProp } from '@react-navigation/core'
+import { RouteProp, useFocusEffect } from '@react-navigation/core'
 import React, { useState, useContext, useEffect } from 'react'
 import {
   View,
@@ -17,23 +17,31 @@ interface Props {
 }
 
 const LeagueDetail: React.FC<Props> = (props) => {
+  // Navigation States
   const { route, navigation } = props
-  // Local State
+
+  // Local States
   const [day, setDay] = useState(getNext5days()[0])
 
-  // Global State
-  const {state} = useContext(LeagueContext);
+  // Global States
+  const {state, getMatchList} = useContext(LeagueContext);
+  const tournamentId = state.tournamentId;
+  const { stages } = state;
+  const selectedTournamentStage = stages ? stages.find((item) => item.stage.tournament.id === tournamentId) : null
+  const matches = selectedTournamentStage ? selectedTournamentStage.matches : null
+  console.log(matches)
+
   useEffect(() => {
-  
-  }, [])
-  console.log(state)
+    // Do something when the screen is focused
+    getMatchList(day.formattedDate)
+  }, [day])
 
   return (
     <View style={styles.container}>
       {/* https://aping.bilyoner.com/sto/programs/active */}
       <DatePicker selected={day} setSelected={setDay} dates={getNext5days()} />
       <DateTitle selected={day} />
-      <Comparisons day={day} navigation={navigation} />
+      <Comparisons day={day} navigation={navigation} matches={matches} />
     </View>
   );
 }

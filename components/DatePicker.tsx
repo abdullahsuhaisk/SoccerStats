@@ -30,12 +30,10 @@ export const DatePicker: React.FC<DatePickerProps> = ({ selected, setSelected, d
 }
 
 function Date({ selected, setSelected, item }: any) {
-  const {getLiveData} = useContext(LeagueContext);
   const { dayName, dayDate } = item
   
   return (
     <TouchableOpacity onPress={() => {
-      getLiveData(item.formattedDate)
       setSelected(item)}
       }>
       <View style={styles.dateCotainer}>

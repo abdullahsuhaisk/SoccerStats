@@ -26,9 +26,9 @@ const leagueReducer = (state = initialState, action) => {
     case leagueCONSTANTS.SET_LEAGUE:
       return { ...state, ...action.payload }
     case leagueCONSTANTS.GET_SELECTED_LEAGUE_TOP_LIST:
-      return { ...state, selectedLeagueToplist: action.payload.initialData, tournament: action.payload.metaData.tournament, loading: false }
+      return { ...state, selectedLeagueToplist: action.payload.initialData, tournament: action.payload.metaData.tournament, loading: false, error: false }
     case leagueCONSTANTS.GET_ALL_MATCHLIST:
-      return { ...state, stages: action.payload, loading: false }
+      return { ...state, stages: action.payload, loading: false, error: false }
     case leagueCONSTANTS.LOADING:
       return { ...state, loading: true }
     case leagueCONSTANTS.ERROR:

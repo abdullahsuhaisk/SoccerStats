@@ -5,7 +5,7 @@ import { Context as LeagueContext } from '../context/LeagueContext';
 
 interface DatePickerProps {
   selected: object,
-  setSelected: () => void
+  setSelected: () => any
   dates: []
 }
 

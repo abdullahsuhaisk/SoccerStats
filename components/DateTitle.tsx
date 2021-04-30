@@ -4,9 +4,9 @@ import { COLORS, FONTS, SIZES } from '../constants';
 
 interface DateTitleProps {
   selected: {
-    dayDate: string,
-    monthName: string,
-    year: string
+    dayDate: string | undefined,
+    monthName: string | undefined,
+    year: string | undefined
   }
 }
 

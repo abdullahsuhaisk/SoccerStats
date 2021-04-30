@@ -1,4 +1,3 @@
-import { RouteProp, useFocusEffect } from '@react-navigation/core'
 import React, { useState, useContext, useEffect } from 'react'
 import {
   View,
@@ -30,8 +29,8 @@ const LeagueDetail: React.FC<Props> = (props) => {
   const selectedTournamentStage = stages ? stages.find((item) => item.stage.tournament.id === tournamentId) : null
   const matches = selectedTournamentStage ? selectedTournamentStage.matches : null
   const isLoading = state.loading
-  console.log(matches)
-  console.log(state)
+  // console.log(matches)
+  // console.log(state)
 
   useEffect(() => {
     // Do something when the screen is focused
@@ -40,7 +39,6 @@ const LeagueDetail: React.FC<Props> = (props) => {
 
   return (
     <View style={styles.container}>
-      {/* https://aping.bilyoner.com/sto/programs/active */}
       <DatePicker selected={day} setSelected={setDay} dates={getNext5days()} />
       <DateTitle selected={day} />
       <Comparisons day={day} navigation={navigation} matches={matches} isLoading={isLoading}/>

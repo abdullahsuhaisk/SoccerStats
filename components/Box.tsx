@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
     Text,
     View,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         borderRadius: 5,
         borderWidth: 0.3,
-        shadowColor: "#000",
+        shadowColor: COLORS.black,
         shadowOffset: {
             width: 0,
             height: 1,

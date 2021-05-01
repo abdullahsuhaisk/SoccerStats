@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { LeagueStack } from "../screens/League/LeagueStack";
-import { TopListScreen } from "../screens/TopListScreen";
+import { TopListScreen } from "../screens/TopList/TopListScreen";
 import { COLORS, FONTS } from "../constants";
 import { Context as LeagueContext } from '../context/LeagueContext';
 

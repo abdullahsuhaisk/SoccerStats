@@ -29,12 +29,6 @@ export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
     console.log(selectedLeagueToplist[0])
     const imageName = selectedLeagueToplist[0].name
     return (
-      // <Center>
-      //   {selectedLeagueToplist[0] !== undefined ? <Image source={images[imageName]} /> :null }
-      //   <Text>
-      //     {selectedLeagueToplist[0].name}
-      //   </Text>
-      // </Center>
       <View style={styles.container}>
         {/* Header */}
         <View style={styles.itemHeader}>
@@ -78,6 +72,10 @@ export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
       </Center>
     );
   }
+}
+
+function ImageNameSelector(imageName:string) {
+  
 }
 
 function HeaderLabel({ text, width }: string) {

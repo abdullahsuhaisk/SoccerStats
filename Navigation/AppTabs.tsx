@@ -37,12 +37,34 @@ export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
             // You can return any component that you like here!
             return <MaterialCommunityIcons name={"soccer"} size={size} color={color} />;
           }
+<<<<<<< HEAD
         })}
         tabBarOptions={{
           activeTintColor: COLORS.selectedIcon,
           inactiveTintColor: COLORS.white,
           tabStyle: {
 
+=======
+          // You can return any component that you like here!
+          return <MaterialCommunityIcons name={"soccer"} size={size} color={color} />;
+        }
+      })}
+      tabBarOptions={{
+        activeTintColor: COLORS.selectedIcon,
+        inactiveTintColor: COLORS.white,
+        tabStyle: {
+        },
+        style: {
+          position: "absolute",
+          backgroundColor: COLORS.primary,
+          borderRadius: 50,
+          height: 70,
+          marginHorizontal: 10,
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 9,
+>>>>>>> 7ffcea7585fa42f44d4530701dec48b12ca45dd7
           },
           style: {
             backgroundColor: COLORS.primary,

@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { COLORS, FONTS, SIZES } from '../constants';
+import { Context as LeagueContext } from '../context/LeagueContext';
 
 interface DatePickerProps {
-  selected:object,
-  setSelected:()=>void
-  dates:[]
+  selected: object,
+  setSelected: () => void
+  dates: []
 }
 
 export const DatePicker: React.FC<DatePickerProps> = ({ selected, setSelected, dates }) => {
 
-  const renderItem = ({ item } :{item:any}) => {
-    const { day, date, id } = item
+  const renderItem = ({ item }: { item: any }) => {
     return (
       <Date selected={selected} setSelected={setSelected} item={item} />
     )
@@ -30,23 +30,26 @@ export const DatePicker: React.FC<DatePickerProps> = ({ selected, setSelected, d
 }
 
 function Date({ selected, setSelected, item }: any) {
-  const { day, date } = item
+  const { dayName, dayDate } = item
+  
   return (
-    <TouchableOpacity onPress={() => setSelected(item)}>
+    <TouchableOpacity onPress={() => {
+      setSelected(item)}
+      }>
       <View style={styles.dateCotainer}>
         <View style={styles.dayView}>
           <Text style={{ ...styles.dateText, fontWeight: '400' }}>
-            {day}
+            {dayName}
           </Text>
         </View>
-        {selected === item ? <View style={{ ...styles.dateView, ...styles.selectedDate }}>
+        {selected.dayName === item.dayName ? <View style={{ ...styles.dateView, ...styles.selectedDate }}>
           <Text style={{ ...styles.dateText, fontSize: SIZES.body4 }}>
-            {date}
+            {dayDate}
           </Text>
         </View> :
           <View style={styles.dateView}>
             <Text style={{ ...styles.dateText, fontSize: SIZES.body4 }}>
-              {date}
+              {dayDate}
             </Text>
           </View>
         }

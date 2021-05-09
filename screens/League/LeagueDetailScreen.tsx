@@ -1,5 +1,5 @@
-import { RouteProp } from '@react-navigation/core'
-import React, { useState } from 'react'
+import { RouteProp, useFocusEffect } from '@react-navigation/core'
+import React, { useState, useContext, useEffect } from 'react'
 import {
   View,
   StyleSheet
@@ -7,6 +7,8 @@ import {
 import { DatePicker, DateTitle } from '../../components'
 import { Comparisons } from '../../components/Comparison'
 import { COLORS, SIZES, FONTS, icons, images } from "../../constants"
+import { Context as LeagueContext } from '../../context/LeagueContext';
+import { getNext5days } from '../../utils/index'
 
 
 interface Props {
@@ -14,83 +16,34 @@ interface Props {
   img: HTMLImageElement
 }
 
-const dates = [
-  {
-    id: 0,
-    day: 'Pazt',
-    date: 21
-  },
-  {
-    id: 1,
-    day: 'Salı',
-    date: 22
-  },
-  {
-    id: 2,
-    day: 'Çrşb',
-    date: 23
-  },
-  {
-    id: 3,
-    day: 'Perşmb',
-    date: 24
-  },
-  {
-    id: 4,
-    day: 'Cuma',
-    date: 25
-  }
-]
-const comprationsData = [
-  {
-    id: '0',
-    homeTeam: 'Galatasaray',
-    awayTeam: 'FenerBahçe',
-    hour: '3:00 Am'
-  },
-  {
-    id: '1',
-    homeTeam: 'Çanakkale Dardanel Spor',
-    awayTeam: 'BozcaAda',
-    hour: '17:00 PM'
-  },
-  {
-    id: '2',
-    homeTeam: 'Tranbzon Spor',
-    awayTeam: 'Beşiktaş',
-    hour: '21:00 Pm'
-  },
-  {
-    id: '3',
-    homeTeam: 'İzmir',
-    awayTeam: 'İstanbul',
-    hour: '3:00 Am'
-  },
-  {
-    id: '4',
-    homeTeam: 'İzmir',
-    awayTeam: 'İstanbul',
-    hour: '3:00 Am'
-  },
-  {
-    id: '5',
-    homeTeam: 'İzmir',
-    awayTeam: 'İstanbul',
-    hour: '3:00 Am'
-  },
-]
-
 const LeagueDetail: React.FC<Props> = (props) => {
+  // Navigation States
   const { route, navigation } = props
-  const [selected, setSelected] = useState(dates[0])
 
-  // console.log(route.params)
+  // Local States
+  const [day, setDay] = useState(getNext5days()[0])
+
+  // Global States
+  const {state, getMatchList} = useContext(LeagueContext);
+  const tournamentId = state.tournamentId;
+  const { stages } = state;
+  const selectedTournamentStage = stages ? stages.find((item) => item.stage.tournament.id === tournamentId) : null
+  const matches = selectedTournamentStage ? selectedTournamentStage.matches : null
+  const isLoading = state.loading
+  console.log(matches)
+  console.log(state)
+
+  useEffect(() => {
+    // Do something when the screen is focused
+    getMatchList(day.formattedDate)
+  }, [day])
+
   return (
     <View style={styles.container}>
       {/* https://aping.bilyoner.com/sto/programs/active */}
-      <DatePicker selected={selected} setSelected={setSelected} dates={dates} />
-      <DateTitle selected={selected} />
-      <Comparisons data={comprationsData} navigation={navigation} />
+      <DatePicker selected={day} setSelected={setDay} dates={getNext5days()} />
+      <DateTitle selected={day} />
+      <Comparisons day={day} navigation={navigation} matches={matches} isLoading={isLoading}/>
     </View>
   );
 }

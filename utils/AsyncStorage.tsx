@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 
-const _storeData = async (key: string, value: string) => {
+const _storeData = async (key: string, value: string|boolean) => {
   try {
     await AsyncStorage.setItem(
       key,
@@ -22,7 +22,7 @@ const _retrieveData = async (key: string): Promise<any> => {
   }
 };
 
-const _removeItem = async (key: string): Promise<string> => {
+const _removeItem = async (key: string): Promise<any> => {
   try {
     await AsyncStorage.removeItem(key)
   } catch (error) {

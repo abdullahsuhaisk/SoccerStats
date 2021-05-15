@@ -3,11 +3,12 @@ import { View, StyleSheet } from 'react-native';
 import AuthForm from '../../components/AuthForm';
 import NavLink from '../../components/NavLink';
 import { COLORS } from '../../constants/theme'
+import auth from '@react-native-firebase/auth';
 
 interface SignupScreenProps {
 }
 
-const SignupScreen: React.FC<SignupScreenProps> = ({ }) => {
+const SignupScreen: React.FC<SignupScreenProps> = (props) => {
   return (
     <View style={styles.container}>
       <AuthForm

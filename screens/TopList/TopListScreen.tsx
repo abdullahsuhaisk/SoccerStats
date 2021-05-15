@@ -5,6 +5,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 import { Button, Text, Image, View, StyleSheet } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
 
 
 import { Context as LeagueContext } from '../../context/LeagueContext'
@@ -17,7 +18,23 @@ interface TopScreenProps {
 export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
   const { state } = useContext(LeagueContext);
   const { selectedLeagueToplist, tournament } = state;
-  console.log(selectedLeagueToplist)
+  // const usersCollection = firestore().collection('leagues').doc('Türkiye - Süper Lig').collection('Fenerbahçe');
+  // console.log(usersCollection)
+
+  // console.log(selectedLeagueToplist)
+
+  useEffect(() => {
+    firestore()
+    .collection('leagues')
+    .get()
+    .then(querySnapshot => {
+      console.log('Total leagues: ', querySnapshot.size);
+  
+      querySnapshot.forEach(documentSnapshot => {
+        console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+      });
+    });
+  }, [])
 
   useFocusEffect(
     React.useCallback(() => {
@@ -26,8 +43,7 @@ export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
     }, [])
   )
   if (selectedLeagueToplist) {
-    console.log(selectedLeagueToplist[0])
-    const imageName = selectedLeagueToplist[0].name
+    // console.log(selectedLeagueToplist[0])
     return (
       <View style={styles.container}>
         {/* Header */}
@@ -42,7 +58,7 @@ export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
           </View>
         <View style={styles.itemContainer}>
           <RowTextItem text={selectedLeagueToplist[0].position} />
-          <RowImageItem text={selectedLeagueToplist[0].middleName} imageName={imageName}/>
+          <RowImageItem text={selectedLeagueToplist[0].middleName} imageName={selectedLeagueToplist[0].name}/>
           <RowTextItem text={selectedLeagueToplist[0].middleName} width={'30%'} />
           <RowTextItem text={selectedLeagueToplist[0].played} />
           <RowTextItem text={selectedLeagueToplist[0].won} />
@@ -52,7 +68,7 @@ export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
         </View>
         <View style={styles.itemContainer}>
           <RowTextItem text={selectedLeagueToplist[1].position} />
-          <RowImageItem text={selectedLeagueToplist[1].middleName} imageName={imageName} />
+          <RowImageItem text={selectedLeagueToplist[1].middleName} imageName={selectedLeagueToplist[1].name} />
           <RowTextItem text={selectedLeagueToplist[1].middleName} width={'30%'} />
           <RowTextItem text={selectedLeagueToplist[1].played} />
           <RowTextItem text={selectedLeagueToplist[1].won} />

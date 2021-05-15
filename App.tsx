@@ -1,9 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
+  Platform
 } from 'react-native';
+import auth from '@react-native-firebase/auth';
 
 import { COLORS } from "./constants"
 import { AppTabs } from './Navigation/AppTabs';
@@ -13,41 +15,43 @@ import { Provider as LeagueProvider } from './context/LeagueContext';
 import { AuthStack } from './screens/Authentication/AuthStack';
 import { _retrieveData, _storeData } from './utils';
 import { setNavigator } from './navigationRef';
+import { Center, Loading } from './components';
 
 const App = (): JSX.Element => {
-  const [isFirstTimeLoad, setIsFirstTimeLoad] = useState(false)
+  // Set an initializing state whilst Firebase connects
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
 
-  const checkFirstTimeLoad = () => {
-    _retrieveData("isFirstTimeOpen").then((result) => {
-      if (result === null) {
-        setIsFirstTimeLoad(true)
-      }
-    })
+  // Handle user state changes
+  function onAuthStateChanged(user:any) {
+    setUser(user);
+    if (initializing) setInitializing(false);
   }
 
   useEffect(() => {
-    checkFirstTimeLoad()
+    // checkFirstTimeLoad()
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
   }, [])
-
-  const handleDone = () => {
-    setIsFirstTimeLoad(false)
-    _storeData('isFirstTimeOpen', 'no')
+  
+  if (initializing) return <Center><Loading/></Center>;
+  else {
+    return (
+      <>
+        <AuthProvider>
+          <LeagueProvider>
+            <SafeAreaView style={{ ...styles.safeAreaWrapper, backgroundColor: COLORS.primary }} />
+            <SafeAreaView style={{ flex: 1, backgroundColor: Platform.OS === 'ios' ? COLORS.white: COLORS.primary }}>
+              <NavigationContainer ref={(navigator) => { setNavigator(navigator) }}>
+                {!user ? <AuthStack /> : <AppTabs />}
+              </NavigationContainer>
+            </SafeAreaView>
+          </LeagueProvider>
+        </AuthProvider>
+      </>
+    );
   }
 
-  return (
-    <>
-      <AuthProvider>
-        <LeagueProvider>
-          <SafeAreaView style={{ ...styles.safeAreaWrapper, backgroundColor: COLORS.primary }} />
-          <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
-            <NavigationContainer ref={(navigator) => { setNavigator(navigator) }}>
-              {isFirstTimeLoad ? <AuthStack onDone={handleDone} /> : <AppTabs />}
-            </NavigationContainer>
-          </SafeAreaView>
-        </LeagueProvider>
-      </AuthProvider>
-    </>
-  );
 };
 
 const styles = StyleSheet.create({

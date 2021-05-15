@@ -22,6 +22,7 @@ const LeagueDetail: React.FC<Props> = (props) => {
   // Local States
   const [day, setDay] = useState(getNext5days()[0])
 
+
   // Global States
   const {state, getMatchList} = useContext(LeagueContext);
   const tournamentId = state.tournamentId;

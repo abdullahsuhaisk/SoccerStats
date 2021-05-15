@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>236924322900-qdif8d2akaq9li53qm7fd72ro45j37k7.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.236924322900-qdif8d2akaq9li53qm7fd72ro45j37k7</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCK9qU0538e8LHygbxOUu3EGZoLtouzylU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>236924322900</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.soccerstats</string>
+	<key>PROJECT_ID</key>
+	<string>statistic-82066</string>
+	<key>STORAGE_BUCKET</key>
+	<string>statistic-82066.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:236924322900:ios:d585326cda7aa7e23b59c1</string>
+	<key>DATABASE_URL</key>
+	<string>https://statistic-82066-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

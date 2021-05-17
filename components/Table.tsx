@@ -1,39 +1,40 @@
 import React from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
-import { Image } from 'react-native-elements';
 import { TeamsImage } from '.';
-import { COLORS, FONTS, images } from '../constants';
+import { COLORS, FONTS } from '../constants';
 
 interface TableProps {
   selectedLeagueToplist: any
 }
 
 const Table: React.FC<TableProps> = ({ selectedLeagueToplist }) => {
-  return (<View style={styles.container}>
-    {/* Header */}
-    <View style={styles.itemHeader}>
-      <HeaderLabel text="#" />
-      <HeaderLabel text="Teamsss" width={'40%'} />
-      <HeaderLabel text="O" />
-      <HeaderLabel text="G" />
-      <HeaderLabel text="M" />
-      <HeaderLabel text="B" />
-      <HeaderLabel text="P" />
+  return (
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.itemHeader}>
+        <HeaderLabel text="#" width={'7%'} />
+        <HeaderLabel text="Takımlar" width={'40%'} />
+        <HeaderLabel text="O" />
+        <HeaderLabel text="G" />
+        <HeaderLabel text="M" />
+        <HeaderLabel text="B" />
+        <HeaderLabel text="P" />
+      </View>
+      <FlatList
+        data={selectedLeagueToplist}
+        renderItem={renderItem}
+        keyExtractor={item => item.index}
+        scrollEnabled
+      />
     </View>
-    <FlatList
-      data={selectedLeagueToplist}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-      scrollEnabled
-    />
-  </View>);
+  );
 }
 
-function renderItem({ item }: { item: object }) {
-  const { position, middleName, name, played, won, lost, drawn, points } = item
+function renderItem({ item, index }: { item: object }) {
+  const { position, middleName, played, won, lost, drawn, points } = item
   return (
-    <View style={styles.itemContainer}>
-      <RowTextItem text={position} />
+    <View style={{backgroundColor: index %2 === 1 ? COLORS.transparentBlack : null ,...styles.itemContainer }}>
+      <RowTextItem text={position} width={'7%'}/>
       <RowImageItem text={middleName} imageName={middleName} />
       <RowTextItem text={middleName} width={'30%'} />
       <RowTextItem text={played} />

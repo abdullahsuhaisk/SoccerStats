@@ -41,7 +41,7 @@ const App = (): JSX.Element => {
         <AuthProvider>
           <LeagueProvider>
             <SafeAreaView style={{ ...styles.safeAreaWrapper, backgroundColor: COLORS.primary }} />
-            <SafeAreaView style={{ flex: 1, backgroundColor: Platform.OS === 'ios' ? COLORS.white: COLORS.primary }}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: Platform.OS === 'ios' ? COLORS.white: user ? COLORS.white: COLORS.primary }}>
               <NavigationContainer ref={(navigator) => { setNavigator(navigator) }}>
                 {!user ? <AuthStack /> : <AppTabs />}
               </NavigationContainer>

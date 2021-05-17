@@ -1,15 +1,14 @@
 import React, { useEffect, useContext } from 'react'
-import { Center } from '../../components';
+import { Center, Table } from '../../components';
 import { createStackNavigator } from "@react-navigation/stack"
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
-import { Button, Text, Image, View, StyleSheet } from 'react-native';
+import { Button, Text, Image, View, StyleSheet, FlatList } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 
 
 import { Context as LeagueContext } from '../../context/LeagueContext'
-import { COLORS, FONTS, images } from '../../constants';
 
 interface TopScreenProps {
 
@@ -18,23 +17,19 @@ interface TopScreenProps {
 export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
   const { state } = useContext(LeagueContext);
   const { selectedLeagueToplist, tournament } = state;
-  // const usersCollection = firestore().collection('leagues').doc('Türkiye - Süper Lig').collection('Fenerbahçe');
-  // console.log(usersCollection)
 
-  // console.log(selectedLeagueToplist)
-
-  useEffect(() => {
-    firestore()
-    .collection('leagues')
-    .get()
-    .then(querySnapshot => {
-      console.log('Total leagues: ', querySnapshot.size);
+  // useEffect(() => {
+  //   firestore()
+  //   .collection('leagues')
+  //   .get()
+  //   .then(querySnapshot => {
+  //     console.log('Total leagues: ', querySnapshot.size);
   
-      querySnapshot.forEach(documentSnapshot => {
-        console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
-      });
-    });
-  }, [])
+  //     querySnapshot.forEach(documentSnapshot => {
+  //       console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+  //     });
+  //   });
+  // }, [])
 
   useFocusEffect(
     React.useCallback(() => {
@@ -42,41 +37,11 @@ export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
       };
     }, [])
   )
+
   if (selectedLeagueToplist) {
     // console.log(selectedLeagueToplist[0])
     return (
-      <View style={styles.container}>
-        {/* Header */}
-        <View style={styles.itemHeader}>
-            <HeaderLabel text="#" />
-            <HeaderLabel text="Teamsss" width={'40%'} />
-            <HeaderLabel text="O" />
-            <HeaderLabel text="G" />
-            <HeaderLabel text="M" />
-            <HeaderLabel text="B" />
-            <HeaderLabel text="P" />
-          </View>
-        <View style={styles.itemContainer}>
-          <RowTextItem text={selectedLeagueToplist[0].position} />
-          <RowImageItem text={selectedLeagueToplist[0].middleName} imageName={selectedLeagueToplist[0].name}/>
-          <RowTextItem text={selectedLeagueToplist[0].middleName} width={'30%'} />
-          <RowTextItem text={selectedLeagueToplist[0].played} />
-          <RowTextItem text={selectedLeagueToplist[0].won} />
-          <RowTextItem text={selectedLeagueToplist[0].lost} />
-          <RowTextItem text={selectedLeagueToplist[0].drawn} />
-          <RowTextItem text={selectedLeagueToplist[0].points} />
-        </View>
-        <View style={styles.itemContainer}>
-          <RowTextItem text={selectedLeagueToplist[1].position} />
-          <RowImageItem text={selectedLeagueToplist[1].middleName} imageName={selectedLeagueToplist[1].name} />
-          <RowTextItem text={selectedLeagueToplist[1].middleName} width={'30%'} />
-          <RowTextItem text={selectedLeagueToplist[1].played} />
-          <RowTextItem text={selectedLeagueToplist[1].won} />
-          <RowTextItem text={selectedLeagueToplist[1].lost} />
-          <RowTextItem text={selectedLeagueToplist[1].drawn} />
-          <RowTextItem text={selectedLeagueToplist[1].points} />
-        </View>
-      </View>
+      <Table selectedLeagueToplist={selectedLeagueToplist} />
     )
   }
   else {
@@ -93,71 +58,6 @@ export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
 function ImageNameSelector(imageName:string) {
   
 }
-
-function HeaderLabel({ text, width }: string) {
-  return (
-    <View style={{ width: width ? width : '10%' }}>
-      <Text style={{ color: COLORS.white, ...FONTS.h4 }}>
-        {text}
-      </Text>
-    </View>
-  )
-}
-
-function RowTextItem({ text, width }: string) {
-  return (
-    <View style={{ width: width ? width : '10%' }}>
-      <Text style={{ ...FONTS.h4, color: COLORS.primary }}>
-        {text}
-      </Text>
-    </View>
-  )
-}
-
-function RowImageItem({ imageName }: string) {
-  return (
-    <View style={{ width: '10%' }}>
-      <Image source={images[imageName]} style={{ width: 20, height: 20 }} />
-    </View>
-  )
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.white,
-  },
-  itemHeader: {
-    backgroundColor: COLORS.lightPrimary,
-    borderBottomColor: COLORS.primary,
-    borderBottomEndRadius: 1,
-    borderBottomWidth: 1,
-    height: 50,
-    display: 'flex',
-    flexDirection: 'row',
-    width: '100%',
-    alignItems: 'center',
-    paddingHorizontal: 5,
-  },
-  itemContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '100%',
-    alignItems: 'center',
-    paddingHorizontal: 5,
-    marginTop: 5
-  },
-  shadow: {
-    shadowColor: COLORS.primary,
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.51,
-    shadowRadius: 13.16,
-    elevation: 20,
-  }
-});
 
 // export type TopListParamsList = {
 //   TopListScreen: undefined;

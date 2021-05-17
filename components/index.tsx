@@ -8,5 +8,9 @@ import { DateTitle } from './DateTitle'
 import Comparison from './Comparison/index'
 import Loading from './Loading'
 import Footer from './Footer'
+import Table from './Table'
+import TeamsImage from './TeamsImage'
 
-export { Button, Box, Calendar, Center, DatePicker, DateTitle, Comparison, Loading, Footer };
+
+
+export { Button, Box, Calendar, Center, DatePicker, DateTitle, Comparison, Loading, Footer, Table, TeamsImage };

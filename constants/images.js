@@ -18,6 +18,7 @@ const bjk = require("../assets/images/Teams/tr-bjk.png")
 const Beşiktaş = require("../assets/images/Teams/superLeagueMid/Beşiktaş.png")
 const Fenerbahçe = require("../assets/images/Teams/superLeagueMid/Fenerbahçe.png")
 const Trabzonspor = require("../assets/images/Teams/superLeagueMid/Trabzonspor.png")
+const Galatasaray = require("../assets/images/Teams/superLeagueMid/Galatasaray.png")
 const Hatayspor = require("../assets/images/Teams/superLeagueMid/Hatayspor.png")
 const Alanyaspor = require("../assets/images/Teams/superLeagueMid/Alanyaspor.png")
 const Sivasspor = require("../assets/images/Teams/superLeagueMid/Sivasspor.png")
@@ -32,7 +33,7 @@ const Başakşehir = require("../assets/images/Teams/superLeagueMid/Başakşehir
 const Ankaragücü = require("../assets/images/Teams/superLeagueMid/Ankaragücü.png")
 const Kayserispor = require("../assets/images/Teams/superLeagueMid/Kayserispor.png")
 const Kasımpaşa = require("../assets/images/Teams/superLeagueMid/Kasımpaşa.png")
-const Erzurumspor = require("../assets/images/Teams/superLeagueMid/Erzurumspor.png")
+const Erzurum = require("../assets/images/Teams/superLeagueMid/Erzurumspor.png")
 const Gençlerbirliği = require("../assets/images/Teams/superLeagueMid/Gençlerbirliği.png")
 const Denizlispor = require("../assets/images/Teams/superLeagueMid/Denizlispor.png")
 
@@ -52,6 +53,7 @@ export default {
     bjk,
     Beşiktaş,
     Fenerbahçe,
+    Galatasaray,
     Trabzonspor,
     Hatayspor,
     Alanyaspor,
@@ -67,7 +69,7 @@ export default {
     Ankaragücü,
     Kayserispor,
     Kasımpaşa,
-    Erzurumspor,
+    Erzurum,
     Gençlerbirliği,
     Denizlispor
 }

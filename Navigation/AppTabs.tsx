@@ -6,7 +6,6 @@ import { LeagueStack } from "../screens/League/LeagueStack";
 import { TopListScreen } from "../screens/TopList/TopListScreen";
 import { COLORS, FONTS } from "../constants";
 import { Context as LeagueContext } from '../context/LeagueContext';
-import { View } from "react-native";
 import { Button, Center } from "../components";
 import { Text } from "react-native-elements";
 import auth from '@react-native-firebase/auth';

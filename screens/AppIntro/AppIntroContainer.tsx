@@ -9,8 +9,10 @@ import {
   ImageProps,
   FlatList
 } from 'react-native'
+import { useTranslation } from 'react-i18next';
+
 import { Button } from '../../components';
-import { COLORS, SIZES, FONTS, icons, images } from "../../constants"
+import { COLORS, SIZES, FONTS, images } from "../../constants"
 
 const AppIntroContainer: React.FC<{
   // show: boolean;
@@ -19,6 +21,7 @@ const AppIntroContainer: React.FC<{
   const [sliderState, setSliderState] = useState({ currentPage: 0 });
   const { width, height } = Dimensions.get('window');
   const { navigate } = props.navigation;
+  const { t } = useTranslation();
 
   const setSliderPage = (event: any) => {
     const { currentPage } = sliderState;
@@ -36,24 +39,24 @@ const AppIntroContainer: React.FC<{
 
   const sliderElements = [{
     image: images.silder1_pic,
-    header: "Header 1",
-    content: "Paragraph content will be here amazing mobile app stast bet things you can easly follow tips and sometings etc..."
+    header: t('slider:header1'),
+    content: t('slider:slider1')
   },
   {
     image: images.silder2_pic,
-    header: "Header 2",
-    content: "Paragraph content will be here amazing mobile app stast bet things you can easly follow tips and sometings etc..."
+    header: t('slider:header2'),
+    content: t('slider:slider2')
   },
   {
     image: images.silder3_pic,
-    header: "Header 3",
-    content: "Paragraph content will be here amazing mobile app stast bet things you can easly follow tips and sometings etc..."
+    header: t('slider:header3'),
+    content: t('slider:slider3')
   },
   {
     image: images.silder4_pic,
-    header: "Header 4",
-    content: "Paragraph content will be here amazing mobile app stast bet things you can easly follow tips and sometings etc..."
-  }
+    header: t('slider:header4'),
+    content: t('slider:slider4')
+  },
   ]
   const renderItem = (slider) => {
     return (

@@ -9,6 +9,9 @@ import { Context as LeagueContext } from '../context/LeagueContext';
 import { Button, Center } from "../components";
 import { Text } from "react-native-elements";
 import auth from '@react-native-firebase/auth';
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from "../components/LanguageSelector";
+
 export type AppParamList = {
   League: undefined;
   TopListScreen: undefined;
@@ -21,13 +24,14 @@ const Tabs = createBottomTabNavigator<AppParamList>();
 
 export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
   const { getMatchList } = useContext(LeagueContext);
+  const { t } = useTranslation();
 
   function Anothercomponent() {
     return (
       <Center>
-        <Text>
-          <Button title={'Sign Out'} onClick={() => auth().signOut().then(() => console.log('User signed out!'))} />
-        </Text>
+        <Button title={'Sign Out'} onClick={() => auth().signOut().then(() => console.log('User signed out!'))} />
+        <Text>{t('slider:welcome')}</Text>
+        <LanguageSelector />
       </Center>
     );
   }
@@ -80,7 +84,7 @@ export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
           marginTop: 5
         }
       }}>
-      <Tabs.Screen name="League" component={LeagueStack} />
+      <Tabs.Screen name={t('league')} component={LeagueStack} />
       <Tabs.Screen name="TopListScreen" component={TopListScreen} />
       <Tabs.Screen name="Another Scr" component={Anothercomponent} />
       {/* <Tabs.Screen name="Auth" component={AuthStack} /> */}

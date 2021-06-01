@@ -16,6 +16,7 @@ import { AuthStack } from './screens/Authentication/AuthStack';
 import { _retrieveData, _storeData } from './utils';
 import { setNavigator } from './navigationRef';
 import { Center, Loading } from './components';
+import './Localization/init18next';
 
 const App = (): JSX.Element => {
   // Set an initializing state whilst Firebase connects

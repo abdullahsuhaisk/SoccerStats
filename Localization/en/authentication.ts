@@ -8,6 +8,7 @@ export default {
   },
   signUp: {
     signUpHeader: 'Sign Up',
+    signUpButton: 'Sign Up',
     alreadyAccount: 'Already have an account ? Sign in instead.'
   }
 };

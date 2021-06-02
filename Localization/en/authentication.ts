@@ -2,7 +2,7 @@ export default {
   email: 'Email',
   password: 'Password',
   login: {
-    loginHeader:'Login',
+    loginHeader:'Login to Your Account',
     loginButton: 'Login',
     dontHaveAccount: "Don't have an account ?"
   },

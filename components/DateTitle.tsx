@@ -3,14 +3,18 @@ import { StyleSheet, Text, View } from 'react-native';
 import { COLORS, FONTS, SIZES } from '../constants';
 
 interface DateTitleProps {
-selected: object
+  selected: {
+    dayDate: string | undefined,
+    monthName: string | undefined,
+    year: string | undefined
+  }
 }
 
 export const DateTitle: React.FC<DateTitleProps> = ({ selected }) => {
   return (
     <View style={styles.container}>
       <Text style={{ ...FONTS.h3, ...styles.textContainer }}>
-        {`${selected.day} Ağustos ${selected.date}   2021`}
+        {`${selected.dayDate} ${selected.monthName} ${selected.year}`}
       </Text>
     </View>
   );

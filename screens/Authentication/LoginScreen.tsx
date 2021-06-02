@@ -10,7 +10,10 @@ interface LoginScreenProps {
 }
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
-  const {state, login, clearErrorMsg} = useContext(AuthContext);
+  // Local State
+
+  // Global State
+  const {state, loginOrRegister, clearErrorMsg} = useContext(AuthContext);
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
@@ -26,7 +29,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
       <AuthForm
         headerText="Login to Your Account"
         errorMessage={state.errorMessage}
-        onSubmitCallback={({email, password}) => login({email, password})}
+        onSubmitCallback={({email, password}) => loginOrRegister({email, password})}
         buttonText="Login"
       />
       <NavLink 

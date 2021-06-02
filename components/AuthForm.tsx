@@ -12,8 +12,9 @@ interface Props {
 }
 
 const AuthForm: React.FC<Props> = ({ headerText, errorMessage, onSubmitCallback, buttonText }) => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    // For now, Registered user uses state
+    const [email, setEmail] = useState('jane.doe@example.com');
+    const [password, setPassword] = useState('SuperSecretPassword!');
     return (
         <>
             <Text h3 style={styles.headerStyle}>{headerText}</Text>

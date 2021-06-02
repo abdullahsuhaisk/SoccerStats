@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "236924322900",
+    "firebase_url": "https://statistic-82066-default-rtdb.firebaseio.com",
+    "project_id": "statistic-82066",
+    "storage_bucket": "statistic-82066.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236924322900:android:19cd4bfa0cd372743b59c1",
+        "android_client_info": {
+          "package_name": "com.soccerstats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236924322900-fi0q6t1d4ft3of6qsl3asdavfe34aspr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhILyE3CbiYjpXi4s90fqkGdF8m8X_sEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236924322900-fi0q6t1d4ft3of6qsl3asdavfe34aspr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

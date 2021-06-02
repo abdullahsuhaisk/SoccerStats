@@ -22,14 +22,16 @@ interface AuthStackProps {
 
 const Stack = createStackNavigator<AuthParamList>()
 
-export const AuthStack: React.FC<AuthStackProps> = ({ onDone }) => {
+export const AuthStack: React.FC<AuthStackProps> = () => {
   return (
     <Stack.Navigator screenOptions={{ header: () => null }} initialRouteName="AppIntro" >
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
-      <Stack.Screen name="AppIntro" options={{ headerShown: false }}>
+      {/* There is a way send props to navigation Screen item, so why i didn't delete it */}
+      {/* <Stack.Screen name="AppIntro" options={{ headerShown: false }}>
         {props => <AppIntroContainer {...props} onDone={onDone} />}
-      </Stack.Screen>
+      </Stack.Screen> */}
+      <Stack.Screen name ="AppIntro" component={AppIntroContainer} />
     </Stack.Navigator>
   );
 };

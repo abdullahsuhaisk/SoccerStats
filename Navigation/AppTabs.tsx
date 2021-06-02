@@ -1,11 +1,14 @@
-import React from "react"
+import React, { useContext, useEffect } from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { LeagueStack } from "../screens/League/LeagueStack";
-import { TopListScreen } from "../screens/TopListScreen";
+import { TopListScreen } from "../screens/TopList/TopListScreen";
 import { COLORS, FONTS } from "../constants";
-
+import { Context as LeagueContext } from '../context/LeagueContext';
+import { Button, Center } from "../components";
+import { Text } from "react-native-elements";
+import auth from '@react-native-firebase/auth';
 export type AppParamList = {
   League: undefined;
   TopListScreen: undefined;
@@ -17,6 +20,21 @@ interface AppTabsProps { }
 const Tabs = createBottomTabNavigator<AppParamList>();
 
 export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
+  const { getMatchList } = useContext(LeagueContext);
+
+  function Anothercomponent() {
+    return (
+      <Center>
+        <Text>
+          <Button title={'Sign Out'} onClick={() => auth().signOut().then(() => console.log('User signed out!'))} />
+        </Text>
+      </Center>
+    );
+  }
+
+  useEffect(() => {
+    getMatchList()
+  }, [])
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
@@ -36,11 +54,13 @@ export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
         activeTintColor: COLORS.selectedIcon,
         inactiveTintColor: COLORS.white,
         tabStyle: {
+
         },
         style: {
-          position: "absolute",
           backgroundColor: COLORS.primary,
           borderRadius: 50,
+          borderWidth: 1,
+          borderColor: '#fff',
           height: 70,
           marginHorizontal: 10,
           shadowColor: "#000",
@@ -61,8 +81,8 @@ export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
         }
       }}>
       <Tabs.Screen name="League" component={LeagueStack} />
-      <Tabs.Screen name="TopList" component={TopListScreen} />
-      <Tabs.Screen name="Another Scr" component={TopListScreen} />
+      <Tabs.Screen name="TopListScreen" component={TopListScreen} />
+      <Tabs.Screen name="Another Scr" component={Anothercomponent} />
       {/* <Tabs.Screen name="Auth" component={AuthStack} /> */}
     </Tabs.Navigator>
   );

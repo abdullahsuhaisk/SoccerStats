@@ -64,7 +64,6 @@ const AppIntroContainer: React.FC<{
 
   const handleOnClick = () => {
     navigate("Login")
-    props.onDone()
   }
 
 

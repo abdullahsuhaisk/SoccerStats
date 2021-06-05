@@ -3,8 +3,10 @@ import { Text, View, Image } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack"
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
+import { useTranslation } from 'react-i18next';
+
 import { LeagueDetailScreen, SelectLeagueScreen } from "..";
-import { COLORS, FONTS, images, SIZES } from "../../constants";
+import { COLORS, FONTS  } from "../../constants";
 import { ComparisonDetail } from "./ComparisonDetail";
 
 type LeagueParamList = {
@@ -37,8 +39,9 @@ function HeaderLogo({ img, title }: { img: HTMLImageElement, title: string }): J
   )
 }
 export const LeagueStack: React.FC<LeagueStackProps> = ({ }) => {
+  const { t } = useTranslation();
+
   return (
-    
       <Stack.Navigator initialRouteName='SelectLeagueScreen' screenOptions={{
         headerStyle: {
           backgroundColor: COLORS.primary,
@@ -62,7 +65,7 @@ export const LeagueStack: React.FC<LeagueStackProps> = ({ }) => {
         headerBackTitleVisible: false
       }}>
         <Stack.Screen name="SelectLeagueScreen" component={SelectLeagueScreen}
-          options={{ title: 'Lig Seçin', headerShown: true }} />
+          options={{ title: t('common:choseLeague'), headerShown: true }} />
         <Stack.Screen name="LeagueDetailScreen" component={LeagueDetailScreen}
           options={({ route }) => {
             return ({ headerTitle: <HeaderLogo img={route.params.img} title={route.params.leagueName} /> })

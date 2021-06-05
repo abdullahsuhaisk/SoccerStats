@@ -1,5 +1,6 @@
 export default {
   league: 'Lig',
   topList: 'Sıralama',
-  setting: 'Ayarlar'
+  setting: 'Ayarlar',
+  choseLeague: 'Lig Seçin'
 };

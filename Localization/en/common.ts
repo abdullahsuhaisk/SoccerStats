@@ -1,5 +1,6 @@
 export default {
   league: 'League',
   topList: 'TopList',
-  setting: 'Setting'
+  setting: 'Setting',
+  choseLeague: 'Choose League'
 };

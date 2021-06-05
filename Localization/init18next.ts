@@ -30,8 +30,14 @@ const languageDetector: LanguageDetectorAsyncModule = {
   },
   detect: (callback: (lng: string) => void) => {
     _retrieveData('APP_LANG').then((lng) => {
-      console.log('Retrieved user preferences language, "APP_LANG" from async store', lng);
-      callback(lng);
+      console.log('Retrieved user preferences language, "APP_LANG" from async store => ', lng);
+      if(!lng) {
+        const bestLng = RNLocalize.findBestAvailableLanguage(AVALAILABLE_LANG_CODES);
+        callback(bestLng?.languageTag ?? 'en');
+      }
+      else {
+        callback(lng);
+      }
     }).catch((err)=> {
       console.log('Error fetching "APP_LANG" from async store', err);
       const bestLng = RNLocalize.findBestAvailableLanguage(AVALAILABLE_LANG_CODES);

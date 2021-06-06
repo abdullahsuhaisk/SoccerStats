@@ -1,5 +1,7 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet, Text, View } from 'react-native'
+
 import { TeamsImage } from '.';
 import { COLORS, FONTS } from '../constants';
 
@@ -8,17 +10,19 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ selectedLeagueToplist }) => {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.itemHeader}>
         <HeaderLabel text="#" width={'7%'} />
-        <HeaderLabel text="Takımlar" width={'40%'} />
-        <HeaderLabel text="O" />
-        <HeaderLabel text="G" />
-        <HeaderLabel text="M" />
-        <HeaderLabel text="B" />
-        <HeaderLabel text="P" />
+        <HeaderLabel text={t('common:teams')} width={'40%'} />
+        <HeaderLabel text={t('common:o')} />
+        <HeaderLabel text={t('common:g')} />
+        <HeaderLabel text={t('common:m')} />
+        <HeaderLabel text={t('common:b')} />
+        <HeaderLabel text={t('common:p')} />
       </View>
       <FlatList
         data={selectedLeagueToplist}

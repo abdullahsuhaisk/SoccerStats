@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
+
 import { Context as AuthContext } from '../../context/AuthContext';
 import { useFocusEffect } from '@react-navigation/native';
 import AuthForm from '../../components/AuthForm';
@@ -24,17 +26,19 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
       };
     }, [])
   )
+  const { t } = useTranslation();
+
   return (
     <View style={styles.container}>
       <AuthForm
-        headerText="Login to Your Account"
+        headerText={t('authentication:login:loginHeader')}
         errorMessage={state.errorMessage}
         onSubmitCallback={({email, password}) => loginOrRegister({email, password})}
-        buttonText="Login"
+        buttonText={t('authentication:login:loginButton')}
       />
       <NavLink 
         routeName="Signup"
-        text="Don't have an account?"
+        text={t('authentication:login:dontHaveAccount')}
       />
     </View>
   );

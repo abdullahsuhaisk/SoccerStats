@@ -1,7 +1,7 @@
-const silder1_pic = require("../assets/images/slider/slider0.jpg");
-const silder2_pic = require("../assets/images/slider/slider01.jpg");
-const silder3_pic = require("../assets/images/slider/slider1.jpg");
-const silder4_pic = require("../assets/images/slider/slider3.jpg");
+const icon = require("../assets/images/slider/icon.jpg");
+const silder1_pic = require("../assets/images/slider/slider1.png");
+const silder2_pic = require("../assets/images/slider/slider2.png");
+const silder3_pic = require("../assets/images/slider/slider3.png");
 
 const superLeague = require("../assets/images/league/tr.png")
 const premierLegue = require("../assets/images/league/en.png")
@@ -41,7 +41,7 @@ export default {
     silder1_pic,
     silder2_pic,
     silder3_pic,
-    silder4_pic,
+    icon,
     superLeague,
     premierLegue,
     italyLeague,

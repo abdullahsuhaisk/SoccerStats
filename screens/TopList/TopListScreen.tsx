@@ -1,13 +1,13 @@
 import React, { useEffect, useContext } from 'react'
-import { Center, Table } from '../../components';
+import { useTranslation } from 'react-i18next';
 import { createStackNavigator } from "@react-navigation/stack"
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 import { Button, Text, Image, View, StyleSheet, FlatList } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
+import { useFocusEffect } from '@react-navigation/native';
 
-
+import { Center, Table } from '../../components';
 import { Context as LeagueContext } from '../../context/LeagueContext'
 
 interface TopScreenProps {
@@ -17,19 +17,20 @@ interface TopScreenProps {
 export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
   const { state } = useContext(LeagueContext);
   const { selectedLeagueToplist, tournament } = state;
+  const { t } = useTranslation();
 
-  // useEffect(() => {
-  //   firestore()
-  //   .collection('leagues')
-  //   .get()
-  //   .then(querySnapshot => {
-  //     console.log('Total leagues: ', querySnapshot.size);
-  
-  //     querySnapshot.forEach(documentSnapshot => {
-  //       console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
-  //     });
-  //   });
-  // }, [])
+  useEffect(() => {
+    console.log('A')
+    firestore()
+    .collection('leagues')
+    .get()
+    .then(querySnapshot => {
+      console.log('Total leagues: ', querySnapshot.size);
+      querySnapshot.forEach(documentSnapshot => {
+        console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+      });
+    });
+  }, [])
 
   useFocusEffect(
     React.useCallback(() => {
@@ -39,24 +40,31 @@ export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
   )
 
   if (selectedLeagueToplist) {
-    // console.log(selectedLeagueToplist[0])
-    return (
-      <Table selectedLeagueToplist={selectedLeagueToplist} />
-    )
+    // console.log(selectedLeagueToplist)
+    if (selectedLeagueToplist.length === 0) {
+      return (
+        <Center>
+          <Text>
+            {t('league:noAvaibleLeague')}
+          </Text>
+        </Center>
+      )
+    }
+    else {
+      return (
+        <Table selectedLeagueToplist={selectedLeagueToplist} />
+      )
+    }
   }
   else {
     return (
       <Center>
         <Text>
-          Lig Seçin
+          {t('common:choseLeague')}
         </Text>
       </Center>
     );
   }
-}
-
-function ImageNameSelector(imageName:string) {
-  
 }
 
 // export type TopListParamsList = {

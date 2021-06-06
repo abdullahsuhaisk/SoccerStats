@@ -44,7 +44,7 @@ export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          if (route.name === "League") {
+          if (route.name === t('league')) {
             iconName = "clipboard-list";
             return <MaterialCommunityIcons name="soccer-field" size={size} color={color} />;
           } else if (route.name === "TopListScreen") {
@@ -85,8 +85,8 @@ export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
         }
       }}>
       <Tabs.Screen name={t('league')} component={LeagueStack} />
-      <Tabs.Screen name="TopListScreen" component={TopListScreen} />
-      <Tabs.Screen name="Another Scr" component={Anothercomponent} />
+      <Tabs.Screen name={t('topList')} component={TopListScreen} />
+      <Tabs.Screen name={t('setting')} component={Anothercomponent} />
       {/* <Tabs.Screen name="Auth" component={AuthStack} /> */}
     </Tabs.Navigator>
   );

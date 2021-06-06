@@ -96,7 +96,7 @@ const AppIntroContainer: React.FC<{
             :
             <View style={{ ...styles.buttonWrapper }}>
               <View style={{ width: SIZES.width / 3 }}>
-                <Button title={"Login"} onClick={handleOnClick} />
+                <Button title={t('authentication:login:loginButton')} onClick={handleOnClick} />
               </View>
             </View>
         }

@@ -2,6 +2,7 @@ import React from 'react'
 import { FlatList, Text, View } from 'react-native'
 import { Comparison } from '.'
 import { Center, Loading } from '..'
+import { FONTS } from '../../constants'
 
 interface ComparisonsProps {
   data: any
@@ -14,9 +15,9 @@ interface ComparisonsProps {
 export const Comparisons: React.FC<ComparisonsProps> = ({ navigation, matches, isLoading }) => {
   if (isLoading) {
     return (
-    <Center>
-      <Loading />
-    </Center>)
+      <Center>
+        <Loading />
+      </Center>)
   }
   const matchLength = matches && matches.length;
 
@@ -32,7 +33,11 @@ export const Comparisons: React.FC<ComparisonsProps> = ({ navigation, matches, i
       </View>);
   }
   else {
-    return (<View><Text>No match</Text></View>)
+    return (
+      <Center>
+        <Text style={FONTS.body4}>No match</Text>
+      </Center>
+    )
   }
 
   function reformatDate(date: string): string {
@@ -54,7 +59,7 @@ export const Comparisons: React.FC<ComparisonsProps> = ({ navigation, matches, i
           hour={hour}
           navigation={navigation}
           matchLength={matchLength}
-          index= {index}
+          index={index}
         />
       </View>
     )

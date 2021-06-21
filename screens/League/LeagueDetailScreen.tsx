@@ -5,7 +5,7 @@ import {
 } from 'react-native'
 import { DatePicker, DateTitle } from '../../components'
 import { Comparisons } from '../../components/Comparison'
-import { COLORS, SIZES, FONTS, icons, images } from "../../constants"
+import { COLORS } from "../../constants"
 import { Context as LeagueContext } from '../../context/LeagueContext';
 import { getNext5days } from '../../utils/index'
 

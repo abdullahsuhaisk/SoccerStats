@@ -1,18 +1,14 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import {
-  Text,
-  useColorScheme,
   View,
-  Image,
-  TouchableOpacity,
   StyleSheet,
   ScrollView,
   FlatList
 } from 'react-native'
-import { Button, Box } from '../../components'
+import { Box } from '../../components'
 
-import { COLORS, SIZES, FONTS, icons, images } from "../../constants"
+import { COLORS, images } from "../../constants"
 import { LeagueStackNavProps } from './LeagueStack'
 import { Context as LeagueContext } from '../../context/LeagueContext';
 

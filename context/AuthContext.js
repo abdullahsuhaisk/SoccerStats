@@ -1,16 +1,25 @@
 import createDataContext from './createDataContext'
 import { _storeData, _removeItem, _retrieveData } from "../utils";
-import { navigate } from '../navigationRef';
+// import { navigate } from '../navigationRef';
 import auth from '@react-native-firebase/auth';
+
+const authTypes = {
+    ADD_ERROR: 'ADD_ERROR',
+    LOGIN_OR_SIGNIN_START: "LOGIN_OR_SIGNIN_START",
+    LOGIN_OR_SIGNIN_SUCCES: "LOGIN_OR_SIGNIN_SUCCES",
+    CLEAR_ERR: 'CLEAR_ERR'
+}
 
 const authReducer = (state, action) => {
     switch (action.type) {
-        case 'add_error':
-            return { ...state, errorMessage: action.payload }
-        case 'login':
-            return { errorMessage: '', token: action.payload }
-        case 'clear_err':
-            return { ...state, errorMessage: '' }
+        case authTypes.ADD_ERROR:
+            return { ...state, errorMessage: action.payload, loading: 'false'  }
+        case authTypes.LOGIN_OR_SIGNIN_START:
+            return {...state, loading: 'true'}
+        case authTypes.LOGIN_OR_SIGNIN_SUCCES:
+            return { errorMessage: '', token: action.payload, loading: 'false' }
+        case authTypes.CLEAR_ERR:
+            return { ...state, errorMessage: '', loading: 'false'  }
         default:
             return state;
     }
@@ -18,41 +27,34 @@ const authReducer = (state, action) => {
 
 const loginOrRegister = (dispatch) => {
     return ({ email, password }) => {
+        dispatch({ type: authTypes.LOGIN_OR_SIGNIN_START });
         const data = { email, password }
         _storeData("user", JSON.stringify(data)).then(() => {
-            setUser(data);
+            // setUser(data);
         })
         auth().signInWithEmailAndPassword(email, password).then((response) => {
-            console.log(response.uid)
-            dispatch({ type: 'login', payload: response.user });
+            // console.log(response.uid)
+            dispatch({ type: authTypes.LOGIN_OR_SIGNIN_SUCCES, payload: response.user });
             // callback();
         }).catch(err => {
             auth().createUserWithEmailAndPassword(email, password)
                 .then((response) => {
-                    dispatch({ type: 'login', payload: response.user });
+                    dispatch({ type: authTypes.LOGIN_OR_SIGNIN_SUCCES, payload: response.user });
                     console.log('User account created & signed in!');
                 }).catch(error => {
-                    if (error.code === 'auth/email-already-in-use') {
-                        console.log('That email address is already in use!');
-                        dispatch({ type: 'add_error', payload: 'That email address is already in use!' });
-                    }
-                    if (error.code === 'auth/invalid-email') {
-                        console.log('That email address is invalid!');
-                        dispatch({ type: 'add_error', payload: 'That email address is invalid!' });
-                    }
-                    console.error(error);
-                    dispatch({ type: 'add_error', payload: error });
+                    // console.error(error);
+                    dispatch({ type: authTypes.ADD_ERROR, payload: error.nativeErrorMessage });
                 })
         })
     }
 }
 
 const clearErrorMsg = dispatch => () => {
-    dispatch({ type: 'clear_err' })
+    dispatch({ type: authTypes.CLEAR_ERR })
 }
 
 export const { Provider, Context } = createDataContext(
     authReducer,
     { loginOrRegister, clearErrorMsg },
-    { token: null, errorMessage: '' }
+    { token: null, errorMessage: '', loading: false }
 );

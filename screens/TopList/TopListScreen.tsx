@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { createStackNavigator } from "@react-navigation/stack"
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -14,27 +14,34 @@ interface TopScreenProps {
 
 }
 
+
 export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
   const { state } = useContext(LeagueContext);
   const { selectedLeagueToplist, tournament } = state;
   const { t } = useTranslation();
+  const [a,b] = useState(5)
 
   useEffect(() => {
-    console.log('A')
-    firestore()
-    .collection('leagues')
-    .get()
-    .then(querySnapshot => {
-      console.log('Total leagues: ', querySnapshot.size);
-      querySnapshot.forEach(documentSnapshot => {
-        console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
-      });
-    });
+
   }, [])
 
   useFocusEffect(
     React.useCallback(() => {
       return () => {
+        const db = firestore();
+db.settings({ host: 'localhost:8080', ssl: false });
+        db
+        .collection('gokce')
+        .get()
+        .then(querySnapshot => {
+          console.log('Total leagues: ', querySnapshot.size);
+          b(querySnapshot.size);
+          querySnapshot.forEach(documentSnapshot => {
+            console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+          });
+        }).catch(err => {
+          console.log(err)
+        });
       };
     }, [])
   )
@@ -61,6 +68,7 @@ export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
       <Center>
         <Text>
           {t('common:choseLeague')}
+          {a}
         </Text>
       </Center>
     );

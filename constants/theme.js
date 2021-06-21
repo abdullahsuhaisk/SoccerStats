@@ -44,11 +44,11 @@ export const FONTS = {
     h2: { fontSize: SIZES.h2, lineHeight: 30, fontWeight: 'bold' },
     h3: { fontSize: SIZES.h3, lineHeight: 22, fontWeight: 'bold' },
     h4: { fontSize: SIZES.h4, lineHeight: 22, fontWeight: 'bold' },
-    body1: { fontSize: SIZES.body1, lineHeight: 36 },
-    body2: { fontSize: SIZES.body2, lineHeight: 30 },
-    body3: { fontSize: SIZES.body3, lineHeight: 22 },
-    body4: { fontSize: SIZES.body4, lineHeight: 22 },
-    body5: { fontSize: SIZES.body5, lineHeight: 22 },
+    body1: { fontSize: SIZES.body1, lineHeight: 36, fontWeight: 'bold', color: COLORS.primary },
+    body2: { fontSize: SIZES.body2, lineHeight: 30, fontWeight: 'bold', color: COLORS.primary },
+    body3: { fontSize: SIZES.body3, lineHeight: 22, fontWeight: 'bold', color: COLORS.primary },
+    body4: { fontSize: SIZES.body4, lineHeight: 22, fontWeight: 'bold', color: COLORS.primary },
+    body5: { fontSize: SIZES.body5, lineHeight: 22, fontWeight: 'bold', color: COLORS.primary },
 };
 // export const FONTS = {
 //     largeTitle: { fontFamily: "Roboto-Black", fontSize: SIZES.largeTitle },

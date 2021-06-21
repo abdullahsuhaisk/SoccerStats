@@ -51,12 +51,7 @@ const AppIntroContainer: React.FC<{
     image: images.silder3_pic,
     header: t('slider:header3'),
     content: t('slider:slider3')
-  },
-  {
-    image: images.silder4_pic,
-    header: t('slider:header4'),
-    content: t('slider:slider4')
-  },
+  }
   ]
   const renderItem = (slider) => {
     return (

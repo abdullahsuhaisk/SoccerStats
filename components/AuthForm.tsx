@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { Text, Input } from "react-native-elements";
 import { Button } from '.';
 import { COLORS } from '../constants/theme'
@@ -9,12 +9,14 @@ interface Props {
     errorMessage: string,
     buttonText: string,
     onSubmitCallback: (param: Object) => void,
+    loading?: boolean
 }
 
-const AuthForm: React.FC<Props> = ({ headerText, errorMessage, onSubmitCallback, buttonText }) => {
+const AuthForm: React.FC<Props> = ({ headerText, errorMessage, onSubmitCallback, buttonText, loading }) => {
     // For now, Registered user uses state
     const [email, setEmail] = useState('jane.doe@example.com');
     const [password, setPassword] = useState('SuperSecretPassword!');
+
     return (
         <>
             <Text h3 style={styles.headerStyle}>{headerText}</Text>
@@ -24,7 +26,7 @@ const AuthForm: React.FC<Props> = ({ headerText, errorMessage, onSubmitCallback,
                 onChangeText={setEmail}
                 autoCapitalize="none"
                 autoCorrect={false}
-                inputStyle={{color: COLORS.white}}
+                inputStyle={{ color: COLORS.white }}
             />
             <Input
                 secureTextEntry
@@ -33,18 +35,20 @@ const AuthForm: React.FC<Props> = ({ headerText, errorMessage, onSubmitCallback,
                 onChangeText={setPassword}
                 autoCapitalize="none"
                 autoCorrect={false}
-                inputStyle={{color: COLORS.white}}
+                inputStyle={{ color: COLORS.white }}
             />
             {errorMessage ? (
                 <Text style={styles.errorMessage}>{errorMessage}</Text>
             ) : null}
             <View style={styles.spacer}>
-                <Button
-                    title={buttonText}
-                    onClick={() => {
-                        onSubmitCallback({ email, password });
-                    }}
-                />
+                {
+                    loading === true ? <ActivityIndicator /> : <Button
+                        title={buttonText}
+                        onClick={() => {
+                            onSubmitCallback({ email, password });
+                        }}
+                    />
+                }
             </View>
         </>
     );

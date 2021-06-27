@@ -9,13 +9,14 @@ import { useFocusEffect } from '@react-navigation/native';
 
 import { Center, Table } from '../../components';
 import { Context as LeagueContext } from '../../context/LeagueContext'
+import { TopListStackNavProps } from './TopListStack';
 
-interface TopScreenProps {
-
+interface TopListScreen {
+  navigation: StackNavigationProp<undefined>
 }
 
 
-export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
+export function TopListScreen({ navigation }): TopListStackNavProps<"TopListScreen"> {
   const { state } = useContext(LeagueContext);
   const { selectedLeagueToplist, tournament } = state;
   const { t } = useTranslation();
@@ -25,26 +26,30 @@ export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
 
   }, [])
 
-  useFocusEffect(
-    React.useCallback(() => {
-      return () => {
-        const db = firestore();
-db.settings({ host: 'localhost:8080', ssl: false });
-        db
-        .collection('gokce')
-        .get()
-        .then(querySnapshot => {
-          console.log('Total leagues: ', querySnapshot.size);
-          b(querySnapshot.size);
-          querySnapshot.forEach(documentSnapshot => {
-            console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
-          });
-        }).catch(err => {
-          console.log(err)
-        });
-      };
-    }, [])
-  )
+//   useFocusEffect(
+//     React.useCallback(() => {
+//       return () => {
+//         const db = firestore();
+// db.settings({ host: 'localhost:8080', ssl: false });
+//         db
+//         .collection('gokce')
+//         .get()
+//         .then(querySnapshot => {
+//           console.log('Total leagues: ', querySnapshot.size);
+//           b(querySnapshot.size);
+//           querySnapshot.forEach(documentSnapshot => {
+//             console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+//           });
+//         }).catch(err => {
+//           console.log(err)
+//         });
+//       };
+//     }, [])
+//   )
+function handleClick(item) {
+  // console.log(item)
+  navigation.navigate('TeamScreen', {item})
+}
 
   if (selectedLeagueToplist) {
     // console.log(selectedLeagueToplist)
@@ -59,7 +64,7 @@ db.settings({ host: 'localhost:8080', ssl: false });
     }
     else {
       return (
-        <Table selectedLeagueToplist={selectedLeagueToplist} />
+        <Table selectedLeagueToplist={selectedLeagueToplist} handleClick ={handleClick} />
       )
     }
   }
@@ -74,23 +79,3 @@ db.settings({ host: 'localhost:8080', ssl: false });
     );
   }
 }
-
-// export type TopListParamsList = {
-//   TopListScreen: undefined;
-// };
-
-// export type TopListStackNavProps<T extends keyof TopListParamsList> = {
-//   // navigation: StackNavigationProp<TopListParamsList, T>;
-//   // route: RouteProp<TopListParamsList, T>;
-
-// };
-
-// const Stack = createStackNavigator<TopListParamsList>();
-
-// export const TopListStack: React.FC<TopScreenProps> = ({}) => {
-//   return (
-//     <Stack.Navigator initialRouteName='TopListScreen'>
-//       <Stack.Screen name="TopListScreen" component={TopListScreen}
-//         options={{ title: 'Select League', headerShown: true}} />
-//     </Stack.Navigator>)
-// }

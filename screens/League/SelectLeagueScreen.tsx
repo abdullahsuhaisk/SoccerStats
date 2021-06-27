@@ -125,7 +125,6 @@ const SelectLegueScreen: LeagueStackNavProps<"SelectLegueScreen"> = ({ navigatio
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.white, padding: 12 }}>
       <View style={{ height: '100%' }}>
-        <ScrollView style={styles.scrollView}>
           <View style={styles.boxWrapper}>
             <FlatList
               numColumns={3}
@@ -134,7 +133,6 @@ const SelectLegueScreen: LeagueStackNavProps<"SelectLegueScreen"> = ({ navigatio
               keyExtractor={item => item.id}
             />
           </View>
-        </ScrollView>
       </View>
     </View>
   )

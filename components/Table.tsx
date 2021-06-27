@@ -1,16 +1,36 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 
 import { TeamsImage } from '.';
 import { COLORS, FONTS } from '../constants';
 
 interface TableProps {
   selectedLeagueToplist: any
+  handleClick?: FunctionConstructor
 }
 
-const Table: React.FC<TableProps> = ({ selectedLeagueToplist }) => {
+const Table: React.FC<TableProps> = ({ selectedLeagueToplist, handleClick }) => {
   const { t } = useTranslation();
+
+  function renderItem({ item, index }: { item: object }) {
+    const { position, middleName, played, won, lost, drawn, points } = item
+    return (
+      <TouchableOpacity onPress={() => handleClick(item)}>
+        <View style={{ backgroundColor: index % 2 === 1 ? COLORS.transparentBlack : null, ...styles.itemContainer }}>
+          <RowTextItem text={position} width={'7%'} />
+          <RowImageItem text={middleName} imageName={middleName} />
+          <RowTextItem text={middleName} width={'30%'} />
+          <RowTextItem text={played} />
+          <RowTextItem text={won} />
+          <RowTextItem text={lost} />
+          <RowTextItem text={drawn} />
+          <RowTextItem text={points} />
+        </View>
+      </TouchableOpacity>
+  
+    )
+  }
 
   return (
     <View style={styles.container}>
@@ -27,28 +47,14 @@ const Table: React.FC<TableProps> = ({ selectedLeagueToplist }) => {
       <FlatList
         data={selectedLeagueToplist}
         renderItem={renderItem}
-        keyExtractor={item => item.index}
+        keyExtractor={item => item.middleName}
         scrollEnabled
       />
     </View>
   );
 }
 
-function renderItem({ item, index }: { item: object }) {
-  const { position, middleName, played, won, lost, drawn, points } = item
-  return (
-    <View style={{backgroundColor: index %2 === 1 ? COLORS.transparentBlack : null ,...styles.itemContainer }}>
-      <RowTextItem text={position} width={'7%'}/>
-      <RowImageItem text={middleName} imageName={middleName} />
-      <RowTextItem text={middleName} width={'30%'} />
-      <RowTextItem text={played} />
-      <RowTextItem text={won} />
-      <RowTextItem text={lost} />
-      <RowTextItem text={drawn} />
-      <RowTextItem text={points} />
-    </View>
-  )
-}
+
 
 function HeaderLabel({ text, width }: string) {
   return (

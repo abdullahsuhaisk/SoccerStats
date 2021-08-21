@@ -16,6 +16,9 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
 
   // Global State
   const {state, loginOrRegister, clearErrorMsg} = useContext(AuthContext);
+  const { t } = useTranslation();
+  const { loading } = state;
+
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
@@ -26,7 +29,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
       };
     }, [])
   )
-  const { t } = useTranslation();
 
   return (
     <View style={styles.container}>
@@ -35,6 +37,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
         errorMessage={state.errorMessage}
         onSubmitCallback={({email, password}) => loginOrRegister({email, password})}
         buttonText={t('authentication:login:loginButton')}
+        loading = {loading}
       />
       <NavLink 
         routeName="Signup"

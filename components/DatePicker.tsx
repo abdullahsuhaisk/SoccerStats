@@ -22,7 +22,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({ selected, setSelected, d
         horizontal={true}
         renderItem={renderItem}
         data={dates}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.dayName}
         scrollEnabled={false}
       />
     </View>
@@ -34,8 +34,7 @@ function Date({ selected, setSelected, item }: any) {
   
   return (
     <TouchableOpacity onPress={() => {
-      setSelected(item)}
-      }>
+      setSelected(item)}}>
       <View style={styles.dateCotainer}>
         <View style={styles.dayView}>
           <Text style={{ ...styles.dateText, fontWeight: '400' }}>

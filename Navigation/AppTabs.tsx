@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { LeagueStack } from "../screens/League/LeagueStack";
-import { TopListScreen } from "../screens/TopList/TopListScreen";
 import { COLORS, FONTS } from "../constants";
 import { Context as LeagueContext } from '../context/LeagueContext';
 import { Button, Center } from "../components";
@@ -11,6 +10,8 @@ import { Text } from "react-native-elements";
 import auth from '@react-native-firebase/auth';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from "../components/LanguageSelector";
+// import ToastMessage from "../components/ToastMessage";
+import { TopListStack } from "../screens/TopList/TopListStack";
 
 export type AppParamList = {
   League: undefined;
@@ -89,7 +90,7 @@ export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
         }
       }}>
       <Tabs.Screen name={t('league')} component={LeagueStack} />
-      <Tabs.Screen name={t('topList')} component={TopListScreen} />
+      <Tabs.Screen name={t('topList')} component={TopListStack} />
       <Tabs.Screen name={t('setting')} component={Anothercomponent} />
       {/* <Tabs.Screen name="Auth" component={AuthStack} /> */}
     </Tabs.Navigator>

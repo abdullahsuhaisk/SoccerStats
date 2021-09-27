@@ -9,9 +9,10 @@ import { useFocusEffect } from '@react-navigation/native';
 
 import { Center, Table } from '../../components';
 import { Context as LeagueContext } from '../../context/LeagueContext'
+import { TopListStackNavProps } from './TopListStack';
 
-interface TopScreenProps {
-
+interface TopListScreen {
+  navigation: StackNavigationProp<undefined>
 }
 
 
@@ -42,7 +43,7 @@ export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
     }
     else {
       return (
-        <Table selectedLeagueToplist={selectedLeagueToplist} />
+        <Table selectedLeagueToplist={selectedLeagueToplist} handleClick ={handleClick} />
       )
     }
   }
@@ -56,23 +57,3 @@ export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
     );
   }
 }
-
-// export type TopListParamsList = {
-//   TopListScreen: undefined;
-// };
-
-// export type TopListStackNavProps<T extends keyof TopListParamsList> = {
-//   // navigation: StackNavigationProp<TopListParamsList, T>;
-//   // route: RouteProp<TopListParamsList, T>;
-
-// };
-
-// const Stack = createStackNavigator<TopListParamsList>();
-
-// export const TopListStack: React.FC<TopScreenProps> = ({}) => {
-//   return (
-//     <Stack.Navigator initialRouteName='TopListScreen'>
-//       <Stack.Screen name="TopListScreen" component={TopListScreen}
-//         options={{ title: 'Select League', headerShown: true}} />
-//     </Stack.Navigator>)
-// }

@@ -6,7 +6,7 @@ import { RouteProp } from "@react-navigation/native";
 import { useTranslation } from 'react-i18next';
 
 import { LeagueDetailScreen, SelectLeagueScreen } from "..";
-import { COLORS, FONTS  } from "../../constants";
+import { COLORS, FONTS } from "../../constants";
 import { ComparisonDetail } from "./ComparisonDetail";
 
 type LeagueParamList = {
@@ -40,39 +40,36 @@ function HeaderLogo({ img, title }: { img: HTMLImageElement, title: string }): J
 }
 export const LeagueStack: React.FC<LeagueStackProps> = ({ }) => {
   const { t } = useTranslation();
-
+  const styles = {
+    headerStyle: {
+      backgroundColor: COLORS.primary,
+      height: 60,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.20,
+      shadowRadius: 1.41,
+      elevation: 2,
+    },
+    headerTintColor: COLORS.white,
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      display: 'flex',
+      justifyContent: 'center',
+      //marginLeft: Platform.OS === 'ios' ? null : 70,
+    },
+    headerBackTitleVisible: false
+  }
   return (
-      <Stack.Navigator initialRouteName='SelectLeagueScreen' screenOptions={{
-        headerStyle: {
-          backgroundColor: COLORS.primary,
-          height: 60,
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0,
-            height: 1,
-          },
-          shadowOpacity: 0.20,
-          shadowRadius: 1.41,
-          elevation: 2,
-        },
-        headerTintColor: COLORS.white,
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          display: 'flex',
-          justifyContent: 'center',
-          //marginLeft: Platform.OS === 'ios' ? null : 70,
-        },
-        headerBackTitleVisible: false
-      }}>
-        <Stack.Screen name="SelectLeagueScreen" component={SelectLeagueScreen}
-          options={{ title: t('common:choseLeague'), headerShown: true }} />
-        <Stack.Screen name="LeagueDetailScreen" component={LeagueDetailScreen}
-          options={({ route }) => {
-            return ({ headerTitle: <HeaderLogo img={route.params.img} title={route.params.leagueName} /> })
-          }} />
-        <Stack.Screen name="ComparisonDetail" component={ComparisonDetail}
-          options={{ headerShown: true }} />
-      </Stack.Navigator>
-    
+    <Stack.Navigator initialRouteName='SelectLeagueScreen' screenOptions={{ ...styles }}>
+      <Stack.Screen name="SelectLeagueScreen" component={SelectLeagueScreen} options={{ title: t('common:choseLeague'), headerShown: true }} />
+      <Stack.Screen name="LeagueDetailScreen" component={LeagueDetailScreen}
+        options={({ route }) => {
+          return ({ headerTitle: <HeaderLogo img={route.params.img} title={route.params.leagueName} /> })
+        }} />
+      <Stack.Screen name="ComparisonDetail" component={ComparisonDetail} options={{ headerShown: true }} />
+    </Stack.Navigator>
   )
 }

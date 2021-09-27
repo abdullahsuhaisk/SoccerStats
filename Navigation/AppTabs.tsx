@@ -23,7 +23,7 @@ interface AppTabsProps { }
 const Tabs = createBottomTabNavigator<AppParamList>();
 
 export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
-  const { getMatchList } = useContext(LeagueContext);
+  const { state: leagueContextState ,selectLeague, getAvaibleLeagues, getAllTopList, getMatchList } = useContext(LeagueContext);
   const { t } = useTranslation();
 
   function Anothercomponent() {
@@ -37,7 +37,11 @@ export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
   }
 
   useEffect(() => {
-    getMatchList()
+    if(!leagueContextState.initialized) {
+      getAvaibleLeagues()
+      getAllTopList()
+      getMatchList()
+    }
   }, [])
   return (
     <Tabs.Navigator

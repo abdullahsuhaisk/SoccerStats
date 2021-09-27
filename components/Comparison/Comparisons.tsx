@@ -43,7 +43,7 @@ export const Comparisons: React.FC<ComparisonsProps> = ({ navigation, matches, i
   function reformatDate(date: string): string {
     // Re shape date it likes, date: "05/03/2021 16:00:00"
     let reformatedDate: string = date.substr(date.lastIndexOf('2021') + 5, 5)
-    console.log(date.lastIndexOf('2021') + 5)
+    // console.log(date.lastIndexOf('2021') + 5)
     return reformatedDate
   }
 

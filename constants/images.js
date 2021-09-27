@@ -5,9 +5,12 @@ const silder3_pic = require("../assets/images/slider/slider3.png");
 
 const superLeague = require("../assets/images/league/tr.png")
 const premierLegue = require("../assets/images/league/en.png")
-const italyLeague = require("../assets/images/league/it.png")
-const esLeague = require("../assets/images/league/es.png")
-const frLeague = require("../assets/images/league/fr.png")
+const seriaA = require("../assets/images/league/it.png")
+const laLiga = require("../assets/images/league/es.png")
+const league1 = require("../assets/images/league/fr.png")
+const bundesliga = require("../assets/images/league/bundesliga.png")
+const ptt1lig = require("../assets/images/league/ptt1lig.png")
+const uefaEurope = require("../assets/images/league/uefa.png")
 
 const fb = require("../assets/images/Teams/tr-fb.png")
 const gs = require("../assets/images/Teams/tr-gs.png")
@@ -37,6 +40,41 @@ const Erzurum = require("../assets/images/Teams/superLeagueMid/Erzurumspor.png")
 const Gençlerbirliği = require("../assets/images/Teams/superLeagueMid/Gençlerbirliği.png")
 const Denizlispor = require("../assets/images/Teams/superLeagueMid/Denizlispor.png")
 
+const leagueImagesArray = [
+    {
+        key: "Süper Lig",
+        image: superLeague
+    },
+    {
+        key: "Bundesliga",
+        image: bundesliga
+    },
+    {
+        key: "TFF 1. Lig",
+        image: ptt1lig
+    },
+    {
+        key: "Serie A",
+        image: seriaA
+    },
+    {
+        key: "Premier Lig",
+        image: premierLegue
+    },
+    {
+        key: "LaLiga",
+        image: laLiga
+    },
+    {
+        key: "Ligue 1",
+        image: league1
+    },
+    {
+        key: "UEFA Avrupa Ligi",
+        image: uefaEurope
+    }
+]
+
 export default {
     silder1_pic,
     silder2_pic,
@@ -44,9 +82,9 @@ export default {
     icon,
     superLeague,
     premierLegue,
-    italyLeague,
-    esLeague,
-    frLeague,
+    seriaA,
+    laLiga,
+    league1,
     fb,
     gs,
     tr,
@@ -71,5 +109,6 @@ export default {
     Kasımpaşa,
     Erzurum,
     Gençlerbirliği,
-    Denizlispor
+    Denizlispor,
+    leagueImagesArray
 }

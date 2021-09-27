@@ -16,35 +16,18 @@ interface TopScreenProps {
 
 
 export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
-  const { state } = useContext(LeagueContext);
-  const { selectedLeagueToplist, tournament } = state;
+  const { state: leagueContextState } = useContext(LeagueContext);
   const { t } = useTranslation();
-  const [a,b] = useState(5)
+  const selectedLeagueToplist = null
+  const [topList, setToplist] = useState(null)
+  const selectedLeagueId = leagueContextState && leagueContextState.selectedLeagueId
+  const topLists = leagueContextState && leagueContextState.allTopList
+  const data = (topLists.find((item) =>  item.leagueId === selectedLeagueId ))
+  
+  console.log(data && data.topList)
+  console.log(selectedLeagueId)
+  console.log(topLists)
 
-  useEffect(() => {
-
-  }, [])
-
-  useFocusEffect(
-    React.useCallback(() => {
-      return () => {
-        const db = firestore();
-db.settings({ host: 'localhost:8080', ssl: false });
-        db
-        .collection('gokce')
-        .get()
-        .then(querySnapshot => {
-          console.log('Total leagues: ', querySnapshot.size);
-          b(querySnapshot.size);
-          querySnapshot.forEach(documentSnapshot => {
-            console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
-          });
-        }).catch(err => {
-          console.log(err)
-        });
-      };
-    }, [])
-  )
 
   if (selectedLeagueToplist) {
     // console.log(selectedLeagueToplist)
@@ -68,7 +51,6 @@ db.settings({ host: 'localhost:8080', ssl: false });
       <Center>
         <Text>
           {t('common:choseLeague')}
-          {a}
         </Text>
       </Center>
     );

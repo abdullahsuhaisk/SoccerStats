@@ -24,25 +24,25 @@ const LeagueDetail: React.FC<Props> = (props) => {
 
 
   // Global States
-  const {state, getMatchList} = useContext(LeagueContext);
-  const tournamentId = state.tournamentId;
-  const { stages } = state;
-  const selectedTournamentStage = stages ? stages.find((item) => item.stage.tournament.id === tournamentId) : null
-  const matches = selectedTournamentStage ? selectedTournamentStage.matches : null
+  const {state} = useContext(LeagueContext);
+  // const tournamentId = state.selectedLeague && state.selectedLeague.tournamentId;
+  // const { stages } = state;
+  // const selectedTournamentStage = stages ? stages.find((item) => item.stage.tournament.id === tournamentId) : null
+  // const matches = selectedTournamentStage ? selectedTournamentStage.matches : null
   const isLoading = state.loading
   // console.log(matches)
   // console.log(state)
 
   useEffect(() => {
     // Do something when the screen is focused
-    getMatchList(day.formattedDate)
+    // getMatchList(day.formattedDate)
   }, [day])
 
   return (
     <View style={styles.container}>
       <DatePicker selected={day} setSelected={setDay} dates={getNext5days()} />
       <DateTitle selected={day} />
-      <Comparisons day={day} navigation={navigation} matches={matches} isLoading={isLoading}/>
+      <Comparisons day={day} navigation={navigation} matches={null} isLoading={isLoading}/>
     </View>
   );
 }

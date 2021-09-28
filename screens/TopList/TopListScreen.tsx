@@ -19,20 +19,14 @@ interface TopListScreen {
 export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
   const { state: leagueContextState } = useContext(LeagueContext);
   const { t } = useTranslation();
-  const selectedLeagueToplist = null
-  const [topList, setToplist] = useState(null)
   const selectedLeagueId = leagueContextState && leagueContextState.selectedLeagueId
   const topLists = leagueContextState && leagueContextState.allTopList
   const data = (topLists.find((item) =>  item.leagueId === selectedLeagueId ))
-  
-  console.log(data && data.topList)
-  console.log(selectedLeagueId)
-  console.log(topLists)
+  const toplist = data && data.topList
 
-
-  if (selectedLeagueToplist) {
+  if (toplist) {
     // console.log(selectedLeagueToplist)
-    if (selectedLeagueToplist.length === 0) {
+    if (toplist.length === 0) {
       return (
         <Center>
           <Text>
@@ -43,7 +37,7 @@ export function TopListScreen({ }): TopListStackNavProps<"TopListScreen"> {
     }
     else {
       return (
-        <Table selectedLeagueToplist={selectedLeagueToplist} handleClick ={handleClick} />
+        <Table selectedLeagueToplist={toplist}  />
       )
     }
   }

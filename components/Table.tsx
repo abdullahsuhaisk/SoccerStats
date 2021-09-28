@@ -12,7 +12,7 @@ interface TableProps {
 
 const Table: React.FC<TableProps> = ({ selectedLeagueToplist, handleClick }) => {
   const { t } = useTranslation();
-
+  // console.log(selectedLeagueToplist)
   function renderItem({ item, index }: { item: object }) {
     const { position, middleName, played, won, lost, drawn, points } = item
     return (
